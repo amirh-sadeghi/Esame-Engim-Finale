@@ -11,6 +11,3 @@ frontend/*.local
 .vscode/
 .idea/
 .DS_Store
-
-# Claude Code
-.claude/
