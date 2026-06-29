@@ -1,0 +1,789 @@
+/* ----------------------------------------------------------
+   Stili dell'applicazione - CSS vanilla (scritto a mano)
+   ---------------------------------------------------------- */
+
+/* ----------------------------------------------------------
+   STEP 1 — Variabili colore per light e dark mode
+   ---------------------------------------------------------- */
+:root {
+  --bg:             #f0f4f8;
+  --surface:        #ffffff;
+  --surface-alt:    #f8fafc;
+  --border:         #e2e8f0;
+  --text-primary:   #0f172a;
+  --text-secondary: #64748b;
+  --accent:         #6366f1;
+  --accent-hover:   #4f46e5;
+  --accent-light:   #eef2ff;
+  --success-bg:     #f0fdf4;
+  --success-text:   #166534;
+  --success-border: #bbf7d0;
+  --error-bg:       #fef2f2;
+  --error-text:     #991b1b;
+  --error-border:   #fecaca;
+  --shadow-md:      0 4px 16px rgba(0,0,0,0.08);
+  --radius:         12px;
+  --transition:     0.25s ease;
+}
+
+[data-theme="dark"] {
+  --bg:             #1c1c2e;
+  --surface:        #2a2a3e;
+  --surface-alt:    #343450;
+  --border:         #4e4e72;
+  --text-primary:   #f0f0ff;
+  --text-secondary: #c0c0e0;
+  --accent:         #a78bfa;
+  --accent-hover:   #c4b5fd;
+  --accent-light:   #3b3270;
+  --success-bg:     #0a3320;
+  --success-text:   #6ee7b7;
+  --success-border: #10b981;
+  --error-bg:       #3d0f0f;
+  --error-text:     #fca5a5;
+  --error-border:   #f87171;
+  --shadow-md:      0 4px 16px rgba(0,0,0,0.5);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  transition: background var(--transition), color var(--transition);
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+/* ----------------------------------------------------------
+   STEP 2 — Header
+   ---------------------------------------------------------- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.1rem, 4vw, 1.5rem);
+  color: var(--text-primary);
+}
+
+.tema-toggle {
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition), transform 0.1s;
+}
+
+.tema-toggle:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  transform: scale(1.03);
+}
+
+/* ----------------------------------------------------------
+   Form
+   ---------------------------------------------------------- */
+.form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: var(--shadow-md);
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.form--modifica {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent), var(--shadow-md);
+}
+
+.form h2 {
+  margin: 0 0 4px;
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 13px;
+  gap: 6px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.form input,
+.form select {
+  padding: 8px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 400;
+  background: var(--surface-alt);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form input:focus,
+.form select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.orari {
+  display: flex;
+  gap: 14px;
+}
+
+.orari label {
+  flex: 1;
+}
+
+.form-azioni {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+button[type='submit'] {
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), transform 0.1s;
+}
+
+button[type='submit']:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.btn-annulla-modifica {
+  background: none;
+  border: 1.5px solid var(--border);
+  color: var(--text-secondary);
+  padding: 9px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.btn-annulla-modifica:hover {
+  border-color: var(--error-border);
+  color: var(--error-text);
+}
+
+/* Neutral clear/reset button (used in form and availability) */
+.btn-svuota {
+  background: none;
+  border: 1.5px solid var(--border);
+  color: var(--text-secondary);
+  padding: 9px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.btn-svuota:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+}
+
+/* ----------------------------------------------------------
+   Collapsible panels (form + availability)
+   ---------------------------------------------------------- */
+.pannelli-toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-pannello {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--text-primary);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.btn-pannello:hover {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+.btn-pannello.attivo {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.pannello {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.45s ease, opacity 0.3s ease, margin-bottom 0.4s ease;
+  margin-bottom: 0;
+}
+
+.pannello.aperto {
+  max-height: 3000px;
+  opacity: 1;
+  margin-bottom: 8px;
+}
+
+/* ----------------------------------------------------------
+   Messages
+   ---------------------------------------------------------- */
+.messaggio {
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin: 0;
+}
+
+.errore {
+  background: var(--error-bg);
+  color: var(--error-text);
+  border: 1px solid var(--error-border);
+}
+
+.successo {
+  background: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
+}
+
+.info {
+  background: var(--accent-light);
+  color: var(--text-primary);
+  border: 1px solid var(--accent);
+}
+
+/* ----------------------------------------------------------
+   Availability checker
+   ---------------------------------------------------------- */
+.disponibilita {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-md);
+}
+
+.disponibilita-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.disponibilita h3 {
+  margin: 0;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+.disponibilita-filtri {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.disponibilita-filtri label {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  font-weight: 600;
+  gap: 6px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  flex: 1;
+  min-width: 130px;
+}
+
+.disponibilita-filtri input {
+  padding: 8px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  background: var(--surface-alt);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.disponibilita-filtri input:focus {
+  border-color: var(--accent);
+}
+
+.disponibilita-hint {
+  margin: 16px 0 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.disponibilita-avviso {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--error-text);
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  line-height: 1.4;
+}
+
+.disponibilita-lista {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.disponibilita-lista li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  font-size: 14px;
+}
+
+.disponibilita-lista li.libera {
+  border-color: var(--success-border);
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), border-color var(--transition);
+}
+
+.disponibilita-lista li.libera:hover {
+  background: var(--success-bg);
+  border-color: var(--success-text);
+  transform: translateX(4px);
+}
+
+.disponibilita-lista li.occupata {
+  border-color: var(--error-border);
+  cursor: default;
+}
+
+.stato-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.libera .stato-dot  { background: var(--success-text); }
+.occupata .stato-dot { background: var(--error-text); }
+
+.sala-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sala-info small {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.stato-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.libera .stato-label  { color: var(--success-text); }
+.occupata .stato-label { color: var(--error-text); }
+
+/* ----------------------------------------------------------
+   Table
+   ---------------------------------------------------------- */
+.lista-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.contatore {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.lista-filtri {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.lista-filtri select,
+.lista-filtri input[type='date'] {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.lista-filtri select:focus,
+.lista-filtri input[type='date']:focus {
+  border-color: var(--accent);
+}
+
+.btn-reset-filtri {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.btn-reset-filtri:hover {
+  border-color: var(--error-border);
+  color: var(--error-text);
+}
+
+.tabella {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.tabella th,
+.tabella td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tabella th {
+  background: var(--surface-alt);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-secondary);
+}
+
+.tabella tr:last-child td {
+  border-bottom: none;
+}
+
+.tabella tr:hover td {
+  background: var(--accent-light);
+}
+
+/* Today highlight */
+.oggi td {
+  background: var(--accent-light);
+  font-weight: 600;
+}
+
+/* Past bookings — subtle italic/muted, still editable */
+.passata td {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Action buttons */
+.azioni {
+  white-space: nowrap;
+}
+
+.btn-azione {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 7px;
+  border-radius: 5px;
+  font-size: 15px;
+  line-height: 1;
+  transition: background var(--transition), transform 0.1s;
+}
+
+.btn-azione:hover {
+  transform: scale(1.15);
+}
+
+.btn-modifica:hover { background: var(--accent-light); }
+.btn-cancella:hover { background: var(--error-bg); }
+
+/* ----------------------------------------------------------
+   Empty state
+   ---------------------------------------------------------- */
+.stato-vuoto {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text-secondary);
+}
+
+.stato-vuoto-icona {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.stato-vuoto p {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.stato-vuoto small {
+  font-size: 13px;
+}
+
+.vuoto {
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 32px 0;
+}
+
+/* ----------------------------------------------------------
+   Confirmation dialog
+   ---------------------------------------------------------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(3px);
+}
+
+.dialogo {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  max-width: 380px;
+  width: 90%;
+  box-shadow: var(--shadow-md);
+}
+
+.dialogo-messaggio {
+  margin: 0 0 20px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.dialogo-azioni {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.btn-annulla {
+  background: none;
+  border: 1.5px solid var(--border);
+  color: var(--text-secondary);
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+
+.btn-annulla:hover {
+  border-color: var(--text-secondary);
+}
+
+.btn-conferma {
+  background: var(--error-text);
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+
+.btn-conferma:hover {
+  opacity: 0.85;
+}
+
+/* ----------------------------------------------------------
+   Loading skeleton
+   ---------------------------------------------------------- */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.scheletro {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.scheletro-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.scheletro-titolo {
+  height: 22px;
+  width: 40%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--surface-alt) 25%, var(--border) 50%, var(--surface-alt) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  margin-bottom: 4px;
+}
+
+.scheletro-riga {
+  height: 14px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--surface-alt) 25%, var(--border) 50%, var(--surface-alt) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.scheletro-btn {
+  height: 38px;
+  width: 100px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--surface-alt) 25%, var(--border) 50%, var(--surface-alt) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  margin-top: 4px;
+}
+
+/* ----------------------------------------------------------
+   Responsive — mobile layout
+   ---------------------------------------------------------- */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px 14px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .orari {
+    flex-direction: column;
+  }
+
+  .form-azioni {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-azioni button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .lista-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .lista-filtri {
+    width: 100%;
+  }
+
+  .lista-filtri select,
+  .lista-filtri input[type='date'] {
+    flex: 1;
+  }
+
+  /* Scrollable table on small screens */
+  .tabella {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pannelli-toggle {
+    flex-direction: column;
+  }
+
+  .btn-pannello {
+    width: 100%;
+  }
+
+  .disponibilita-filtri {
+    flex-direction: column;
+  }
+
+  .disponibilita-filtri label {
+    min-width: unset;
+  }
+
+  .dialogo {
+    padding: 20px;
+  }
+}
