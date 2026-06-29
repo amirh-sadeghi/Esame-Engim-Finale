@@ -10,9 +10,9 @@ export interface Prenotazione {
   sala_id: number
   sala_nome: string
   prenotante: string
-  data: string       // "2025-04-10"
-  inizio: string     // "09:00"
-  fine: string       // "10:30"
+  data: string     
+  inizio: string    
+  fine: string     
 }
 
 export interface NuovaPrenotazione {
@@ -23,7 +23,6 @@ export interface NuovaPrenotazione {
   fine: string
 }
 
-// Like NuovaPrenotazione but includes the id of the booking to update
 export interface ModificaPrenotazione extends NuovaPrenotazione {
   id: number
 }

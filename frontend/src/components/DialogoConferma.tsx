@@ -21,7 +21,6 @@ function DialogoConferma({ prenotazione, onConferma, onAnnulla }: DialogoConferm
     return () => ctx.revert()
   }, [])
 
-  // Close on Escape
   useEffect(() => {
     function onKey(e: KeyboardEvent) { if (e.key === 'Escape') onAnnulla() }
     window.addEventListener('keydown', onKey)

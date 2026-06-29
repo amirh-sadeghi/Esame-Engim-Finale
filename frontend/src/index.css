@@ -1,10 +1,3 @@
-/* ----------------------------------------------------------
-   Stili dell'applicazione - CSS vanilla (scritto a mano)
-   ---------------------------------------------------------- */
-
-/* ----------------------------------------------------------
-   STEP 1 — Variabili colore per light e dark mode
-   ---------------------------------------------------------- */
 :root {
   --bg:             #f0f4f8;
   --surface:        #ffffff;
@@ -63,9 +56,6 @@ body {
   padding: 32px 20px;
 }
 
-/* ----------------------------------------------------------
-   STEP 2 — Header
-   ---------------------------------------------------------- */
 .header {
   display: flex;
   align-items: center;
@@ -100,9 +90,6 @@ h1 {
   transform: scale(1.03);
 }
 
-/* ----------------------------------------------------------
-   Form
-   ---------------------------------------------------------- */
 .form {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -155,6 +142,34 @@ h1 {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
+/* Input with leading icon */
+.input-con-icona {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.icona-input {
+  position: absolute;
+  left: 10px;
+  color: var(--text-secondary);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+.input-con-icona input,
+.input-con-icona select {
+  padding-left: 34px;
+  width: 100%;
+}
+
+[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator,
+[data-theme="dark"] input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
 .orari {
   display: flex;
   gap: 14px;
@@ -203,7 +218,6 @@ button[type='submit']:hover {
   color: var(--error-text);
 }
 
-/* Neutral clear/reset button (used in form and availability) */
 .btn-svuota {
   background: none;
   border: 1.5px solid var(--border);
@@ -220,9 +234,6 @@ button[type='submit']:hover {
   color: var(--text-primary);
 }
 
-/* ----------------------------------------------------------
-   Collapsible panels (form + availability)
-   ---------------------------------------------------------- */
 .pannelli-toggle {
   display: flex;
   gap: 10px;
@@ -239,6 +250,9 @@ button[type='submit']:hover {
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   transition: background var(--transition), border-color var(--transition), color var(--transition);
 }
 
@@ -267,9 +281,6 @@ button[type='submit']:hover {
   margin-bottom: 8px;
 }
 
-/* ----------------------------------------------------------
-   Messages
-   ---------------------------------------------------------- */
 .messaggio {
   padding: 10px 12px;
   border-radius: 6px;
@@ -295,9 +306,6 @@ button[type='submit']:hover {
   border: 1px solid var(--accent);
 }
 
-/* ----------------------------------------------------------
-   Availability checker
-   ---------------------------------------------------------- */
 .disponibilita {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -436,14 +444,14 @@ button[type='submit']:hover {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .libera .stato-label  { color: var(--success-text); }
 .occupata .stato-label { color: var(--error-text); }
 
-/* ----------------------------------------------------------
-   Table
-   ---------------------------------------------------------- */
 .lista-header {
   display: flex;
   align-items: center;
@@ -491,6 +499,9 @@ button[type='submit']:hover {
   border-radius: 6px;
   font-size: 13px;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   transition: border-color var(--transition), color var(--transition);
 }
 
@@ -533,19 +544,15 @@ button[type='submit']:hover {
   background: var(--accent-light);
 }
 
-/* Today highlight */
 .oggi td {
   background: var(--accent-light);
   font-weight: 600;
 }
-
-/* Past bookings — subtle italic/muted, still editable */
 .passata td {
   color: var(--text-secondary);
   font-style: italic;
 }
 
-/* Action buttons */
 .azioni {
   white-space: nowrap;
 }
@@ -554,23 +561,22 @@ button[type='submit']:hover {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px 7px;
+  padding: 5px 8px;
   border-radius: 5px;
-  font-size: 15px;
   line-height: 1;
-  transition: background var(--transition), transform 0.1s;
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-secondary);
+  transition: background var(--transition), color var(--transition), transform 0.1s;
 }
 
 .btn-azione:hover {
-  transform: scale(1.15);
+  transform: scale(1.1);
 }
 
-.btn-modifica:hover { background: var(--accent-light); }
-.btn-cancella:hover { background: var(--error-bg); }
+.btn-modifica:hover { background: var(--accent-light); color: var(--accent); }
+.btn-cancella:hover { background: var(--error-bg); color: var(--error-text); }
 
-/* ----------------------------------------------------------
-   Empty state
-   ---------------------------------------------------------- */
 .stato-vuoto {
   text-align: center;
   padding: 48px 20px;
@@ -578,7 +584,7 @@ button[type='submit']:hover {
 }
 
 .stato-vuoto-icona {
-  font-size: 48px;
+  color: var(--text-secondary);
   margin-bottom: 12px;
 }
 
@@ -599,9 +605,6 @@ button[type='submit']:hover {
   padding: 32px 0;
 }
 
-/* ----------------------------------------------------------
-   Confirmation dialog
-   ---------------------------------------------------------- */
 .overlay {
   position: fixed;
   inset: 0;
@@ -666,9 +669,6 @@ button[type='submit']:hover {
   opacity: 0.85;
 }
 
-/* ----------------------------------------------------------
-   Loading skeleton
-   ---------------------------------------------------------- */
 @keyframes shimmer {
   0%   { background-position: -200% 0; }
   100% { background-position:  200% 0; }
@@ -718,9 +718,6 @@ button[type='submit']:hover {
   margin-top: 4px;
 }
 
-/* ----------------------------------------------------------
-   Responsive — mobile layout
-   ---------------------------------------------------------- */
 @media (max-width: 600px) {
   .container {
     padding: 20px 14px;
@@ -760,7 +757,6 @@ button[type='submit']:hover {
     flex: 1;
   }
 
-  /* Scrollable table on small screens */
   .tabella {
     display: block;
     overflow-x: auto;

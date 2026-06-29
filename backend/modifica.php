@@ -28,7 +28,6 @@ $date    = $input['data'];
 $start   = $input['inizio'];
 $end     = $input['fine'];
 
-// Overlap check excluding the booking being edited
 $check = $database->prepare('
     SELECT COUNT(*) FROM prenotazioni
     WHERE sala_id = ?

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import type { Prenotazione } from '../types'
 import DialogoConferma from './DialogoConferma'
+import { PencilIcon, TrashIcon, CalendarIcon, XMarkIcon } from './Icons'
 
 interface ListaPrenotazioniProps {
   prenotazioni: Prenotazione[]
@@ -50,7 +51,7 @@ function ListaPrenotazioni({ prenotazioni, onModifica, onCancella }: ListaPrenot
   if (prenotazioni.length === 0) {
     return (
       <div className="stato-vuoto">
-        <div className="stato-vuoto-icona">📅</div>
+        <div className="stato-vuoto-icona"><CalendarIcon size={48} /></div>
         <p>Nessuna prenotazione presente.</p>
         <small>Usa il form qui sopra per aggiungere la prima prenotazione.</small>
       </div>
@@ -89,7 +90,7 @@ function ListaPrenotazioni({ prenotazioni, onModifica, onCancella }: ListaPrenot
               className="btn-reset-filtri"
               onClick={() => { setFiltroSala(''); setFiltroData('') }}
             >
-              ✕ Reset
+              <XMarkIcon size={14} /> Reset
             </button>
           )}
         </div>
@@ -122,11 +123,11 @@ function ListaPrenotazioni({ prenotazioni, onModifica, onCancella }: ListaPrenot
                 <td>{p.data}</td>
                 <td>{p.inizio} – {p.fine}</td>
                 <td className="azioni">
-                  <button className="btn-azione btn-modifica" onClick={() => onModifica(p)}>
-                    ✏️
+                  <button className="btn-azione btn-modifica" onClick={() => onModifica(p)} title="Modifica">
+                    <PencilIcon size={15} />
                   </button>
-                  <button className="btn-azione btn-cancella" onClick={() => setDaCancellare(p)}>
-                    🗑️
+                  <button className="btn-azione btn-cancella" onClick={() => setDaCancellare(p)} title="Elimina">
+                    <TrashIcon size={15} />
                   </button>
                 </td>
               </tr>

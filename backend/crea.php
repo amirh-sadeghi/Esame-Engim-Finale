@@ -27,8 +27,6 @@ $date    = $input['data'];
 $start   = $input['inizio'];
 $end     = $input['fine'];
 
-// Server-side overlap check: reject if the room already has a booking that
-// overlaps the requested time slot on the same date.
 $check = $database->prepare('
     SELECT COUNT(*) FROM prenotazioni
     WHERE sala_id = ?

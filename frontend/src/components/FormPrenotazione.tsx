@@ -43,7 +43,6 @@ function FormPrenotazione({
   const erroreRef = useRef<HTMLParagraphElement>(null)
   const successoRef = useRef<HTMLParagraphElement>(null)
 
-  // Pre-fill when editing an existing booking
   useEffect(() => {
     if (prenotazioneInModifica) {
       setSalaId(String(prenotazioneInModifica.sala_id))
@@ -59,7 +58,6 @@ function FormPrenotazione({
     }
   }, [prenotazioneInModifica])
 
-  // Pre-fill sala/date/time from availability checker (prenotante stays empty)
   useEffect(() => {
     if (!preCompila) return
     setSalaId(String(preCompila.sala_id))
@@ -72,7 +70,6 @@ function FormPrenotazione({
     setInfoMessaggio('Sala e orario copiati dalla verifica — inserisci il prenotante e premi Prenota.')
   }, [preCompila])
 
-  // Stagger form fields on mount
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('label, .orari, .form-azioni', {
@@ -82,7 +79,6 @@ function FormPrenotazione({
     return () => ctx.revert()
   }, [])
 
-  // Shake on error
   useEffect(() => {
     if (!errore || !erroreRef.current) return
     gsap.from(erroreRef.current, { opacity: 0, duration: 0.15 })
@@ -92,7 +88,6 @@ function FormPrenotazione({
     })
   }, [errore])
 
-  // Slide down on success
   useEffect(() => {
     if (!successo || !successoRef.current) return
     gsap.from(successoRef.current, { opacity: 0, y: -10, duration: 0.35, ease: 'back.out(1.5)' })

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import type { Sala, Prenotazione } from '../types'
+import { CheckIcon } from './Icons'
 
 interface PreCompila {
   sala_id: number
@@ -26,7 +27,6 @@ function DisponibilitaSale({ sale, prenotazioni, onSelezionaLibera }: Disponibil
   const campiCompilati = data !== '' || inizio !== '' || fine !== ''
   const pronta = data !== '' && inizio !== '' && fine !== '' && fine > inizio && data >= oggi
 
-  // Soft hints shown below the filters when input is invalid
   let avviso = ''
   if (data && data < oggi) {
     avviso = 'La data selezionata è nel passato.'
@@ -115,7 +115,7 @@ function DisponibilitaSale({ sale, prenotazioni, onSelezionaLibera }: Disponibil
                 <small>cap. {sala.capienza} · piano {sala.piano}</small>
               </span>
               <span className="stato-label">
-                {occupata ? 'Occupata' : '✓ Libera — clicca per prenotare'}
+                {occupata ? 'Occupata' : <><CheckIcon size={13} /> Libera — clicca per prenotare</>}
               </span>
             </li>
           ))}
